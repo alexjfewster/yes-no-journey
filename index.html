@@ -190,8 +190,8 @@
             <p class="muted explanation"></p>
 
             <div class="actions large">
-              <a class="btn btn-yes" role="button"></a>
-              <a class="btn btn-no" role="button"></a>
+              <button class="btn btn-yes" type="button"></button>
+              <button class="btn btn-no" type="button"></button>
             </div>
 
             <div class="small muted footnote" aria-hidden="true"></div>
@@ -206,78 +206,14 @@
     <p class="small muted">Made with care • Pastel theme • Lightweight & privacy-friendly</p>
   </footer>
 
-  <!-- Questions model: sample data shipped with the site.
-       Replace or edit ./data/questions.json to change content.
-       For quick edits you can edit below JSON — DO NOT remove the surrounding <script> tag. -->
-  <script id="questions" type="application/json">
-  {
-    "start_id": "1",
-    "questions": [
-      {
-        "id": "1",
-        "image": "https://images.unsplash.com/photo-1501965093654-2be7a7737aab?q=80&w=900&auto=format&fit=crop&crop=entropy",
-        "alt": "sunrise over soft hills",
-        "question": "1. Are you feeling happy?",
-        "yes_target": "2",
-        "no_target": "3",
-        "meta": { "tags": ["time-of-day"], "explanation": "Small choices about routine." }
-      },
-      {
-        "id": "2",
-        "image": "https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=900&auto=format&fit=crop&crop=entropy",
-        "alt": "steaming cup of coffee on a wooden table",
-        "question": "2. Arey you going to something?",
-        "yes_target": "4",
-        "no_target": "5",
-        "meta": { "tags": ["beverage"] }
-      },
-      {
-        "id": "3",
-        "image": "https://images.unsplash.com/photo-1473773508845-188df298d2d1?q=80&w=900&auto=format&fit=crop&crop=entropy",
-        "alt": "person looking out over a leafy park",
-        "question": "3. Are you in physical pain?",
-        "yes_target": "4",
-        "no_target": "end_wander",
-        "meta": { "explanation": "Outdoor preference shapes the next suggestion." }
-      },
-      {
-        "id": "4",
-        "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=900&auto=format&fit=crop&crop=entropy",
-        "alt": "bright desk with art supplies",
-        "question": "4. Do you favor creative tasks?",
-        "yes_target": "end_early",
-        "no_target": "end_wander",
-        "meta": { "tags": ["work", "creative"] }
-      },
-      {
-        "id": "5",
-        "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=900&auto=format&fit=crop&crop=entropy",
-        "alt": "cozy reading nook with a soft blanket",
-        "question": "5. Would you like a calm, quiet plan for today?",
-        "yes_target": "end_wander",
-        "no_target": "end_early"
-      },
-      {
-        "id": "end_early",
-        "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=900&auto=format&fit=crop&crop=entropy",
-        "alt": "gentle morning light in a window",
-        "question": "Result: You're an Early Bloom",
-        "yes_target": null,
-        "no_target": null,
-        "meta": { "summary": "You thrive in morning light, small rituals, and gentle momentum.", "tags": ["result","early"] }
-      },
-      {
-        "id": "end_wander",
-        "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=900&auto=format&fit=crop&crop=entropy",
-        "alt": "a soft path winding through trees",
-        "question": "Result: Wandering Calm",
-        "yes_target": null,
-        "no_target": null,
-        "meta": { "summary": "You prefer flexible, soothing experiences and gentle exploration.", "tags": ["result","calm"] }
-      }
-    ]
-  }
-  </script>
+  <!-- Questions model is loaded from ./data/questions.json by default. The embedded JSON was removed
+       to keep content separated; the script will attempt to fetch the JSON and fall back to an
+       embedded <script id="questions"> block if present. To override button labels you have options:
+       - Per-question in the model: add "responses": {"yes":"Yup","no":"Nah"} on a question object.
+       - Global or per-question JS overrides: set window.YES_NO_OVERRIDES = { yes: 'Yup', no: 'Nah' }
+         or window.YES_NO_OVERRIDES = { "qId": { yes:'Yup' }, "default": { no: 'Nah' } } before the app script runs.
+       - URL query params for global labels: ?yes=Yay&no=Nah
+       Precedence is: window per-question override -> question.responses/meta.responses -> URL params -> model.responses -> defaults ('Yes'/'No'). -->
 
   <script src="js/app.js" defer></script>
 
