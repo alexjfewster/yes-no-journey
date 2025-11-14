@@ -237,8 +237,8 @@
 
   function hideAllPages(){
     // hide everything under pagesRoot and other templates
-    missingPage.hidden = true;
-    startCard.hidden = true;
+    if (missingPage) missingPage.hidden = true;
+    if (startCard) startCard.hidden = true;
     Array.from(pagesRoot.children).forEach(ch => ch.hidden = true);
   }
 
@@ -338,6 +338,10 @@
   backBtn.addEventListener('click', (e) => { e.preventDefault(); goBack(); });
   document.getElementById('missing-back').addEventListener('click', (e) => { e.preventDefault(); goBack(); });
   document.getElementById('missing-restart').addEventListener('click', (e) => { e.preventDefault(); navigateTo(startId, { replace: true }); });
+
+  // Start button
+  const startBtn = document.querySelector('[data-start]');
+  if (startBtn) startBtn.addEventListener('click', (e) => { e.preventDefault(); navigateTo(startId); });
 
   // Handle browser back/forward with popstate (we use pushState so hashchange won't fire on programmatic updates)
   window.addEventListener('popstate', () => {
