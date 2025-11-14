@@ -3,7 +3,7 @@
   "questions": [
     {
       "id": "1",
-      "image": "https://images.unsplash.com/photo-1501965093654-2be7a7737aab?q=80&w=900&auto=format&fit=crop&crop=entropy",
+      "image": "https://picsum.photos/900/600",
       "alt": "sunrise over soft hills",
       "question": "1. Are you feeling happy?",
       "yes_target": "2",
