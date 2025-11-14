@@ -70,16 +70,6 @@
   const missingPage = document.getElementById('missing-page');
   const startCard = document.getElementById('start-card');
 
-  // Settings UI
-  const settingsBtn = document.getElementById('open-settings');
-  const settingsPanel = document.getElementById('settings-panel');
-  const closeSettingsBtn = document.getElementById('close-settings');
-  const toggleAnimations = document.getElementById('toggle-animations');
-  const toggleSound = document.getElementById('toggle-sound');
-  const toggleCompact = document.getElementById('toggle-compact');
-  const themeSelect = document.getElementById('theme-select');
-  const resetProgress = document.getElementById('reset-progress');
-
   // Back nav
   const backBtn = document.getElementById('nav-back');
 
@@ -89,36 +79,6 @@
 
   // Respect prefers-reduced-motion initial value
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduceMotion) {
-    document.body.setAttribute('data-animations','off');
-    if (toggleAnimations) toggleAnimations.checked = false;
-  } else {
-    if (toggleAnimations) toggleAnimations.checked = true;
-  }
-
-  // Persist small preferences
-  try {
-    const prefs = JSON.parse(localStorage.getItem('ynj:prefs') || '{}');
-    if (prefs.compact) {
-      document.body.setAttribute('data-compact','on'); toggleCompact.checked = true;
-    }
-    if (prefs.animations === false) {
-      document.body.setAttribute('data-animations','off'); toggleAnimations.checked = false;
-    }
-    if (prefs.theme) {
-      document.body.className = `theme-${prefs.theme}`;
-      themeSelect.value = prefs.theme;
-    }
-  } catch(e){}
-
-  function savePrefs(){
-    const prefs = {
-      compact: document.body.getAttribute('data-compact') === 'on',
-      animations: document.body.getAttribute('data-animations') === 'on',
-      theme: (themeSelect && themeSelect.value) || 'default'
-    };
-    try { localStorage.setItem('ynj:prefs', JSON.stringify(prefs)); } catch(e){}
-  }
 
   // Build pages from model
   function buildPages(){
@@ -376,32 +336,6 @@
         if (start) start.click();
       }
     }
-  });
-
-  // Settings toggles
-  settingsBtn.addEventListener('click', (e) => {
-    const open = settingsPanel.classList.toggle('open');
-    settingsBtn.setAttribute('aria-expanded', String(open));
-  });
-  closeSettingsBtn.addEventListener('click', () => { settingsPanel.classList.remove('open'); settingsBtn.setAttribute('aria-expanded','false'); });
-
-  toggleAnimations.addEventListener('change', () => {
-    const on = toggleAnimations.checked;
-    document.body.setAttribute('data-animations', on ? 'on' : 'off');
-    savePrefs();
-  });
-  toggleCompact.addEventListener('change', () => {
-    const on = toggleCompact.checked;
-    document.body.setAttribute('data-compact', on ? 'on' : 'off');
-    savePrefs();
-  });
-  themeSelect.addEventListener('change', () => {
-    const v = themeSelect.value || 'default';
-    document.body.className = `theme-${v}`;
-    savePrefs();
-  });
-  resetProgress.addEventListener('click', () => {
-    historyStack = []; navigateTo(startId, { replace: true });
   });
 
   // Build and initialize

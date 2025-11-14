@@ -197,24 +197,6 @@ body{
 .progress-dots span{ width:8px; height:8px; display:inline-block; border-radius:999px; background:rgba(0,0,0,0.12); }
 .progress-dots span.active{ background:var(--accent); width:10px; height:10px }
 
-/* settings panel */
-.settings-panel{
-  position:fixed;
-  right:12px;
-  top:64px;
-  width:320px;
-  max-width:92%;
-  background:var(--card-bg);
-  border-radius:12px;
-  box-shadow:0 12px 40px rgba(20,20,40,0.12);
-  padding:12px;
-  z-index:60;
-  transform-origin:top right;
-  display:none;
-}
-.settings-panel.open{ display:block; }
-.settings-inner h2{ margin:6px 0 10px 0; font-size:16px; }
-
 /* small components */
 .muted{ color:var(--muted); }
 .small{ font-size:13px; }
